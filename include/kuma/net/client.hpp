@@ -1,0 +1,26 @@
+#pragma once
+
+#include <functional>
+#include <string>
+#include <map>
+#include <memory>
+
+namespace Kuma{
+
+	enum class HttpClientMethod {
+		Post
+	};
+
+	extern const char *ToString(HttpClientMethod method);
+
+	class HttpClient {
+	public:
+		using CompleteCallbackType = std::function<void(std::int32_t)>;
+
+		static constexpr auto MaxEventsPerRequest = 25;
+	public:
+
+		virtual void MakeRequest(HttpClientMethod method, const std::string &hostname, const std::string &path, const std::map<std::string, std::string> &headers, std::string&& body, CompleteCallbackType &&complete) = 0;
+	}; 
+
+}//namespace Kuma::
