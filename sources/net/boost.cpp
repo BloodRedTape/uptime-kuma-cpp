@@ -51,7 +51,7 @@ void Kuma::BoostHttpClient::MakeRequest(HttpClientMethod method, const std::stri
 			);
             ssl_stream = std::make_unique<boost::asio::ssl::stream<boost::asio::ip::tcp::socket&>>(socket, *ssl_context);
             ssl_stream->set_verify_mode(boost::asio::ssl::verify_none);
-            ssl_stream->set_verify_callback(boost::asio::ssl::rfc2818_verification(clean_hostname));
+            ssl_stream->set_verify_callback(boost::asio::ssl::host_name_verification(clean_hostname));
 
 			if (SSL_set_tlsext_host_name(ssl_stream->native_handle(), clean_hostname.c_str()) != 1) {
 				throw boost::system::system_error(
