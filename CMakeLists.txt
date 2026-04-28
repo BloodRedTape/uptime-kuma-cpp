@@ -33,8 +33,5 @@ endif()
 target_include_directories(UptimeKumaCpp 
 	PUBLIC "./include"
 )
-target_precompile_headers(UptimeKumaCpp 
-	PUBLIC "./include/kuma/provider/provider.hpp"
-	PUBLIC "./include/kuma/provider/worker_provider.hpp"
-)
+
 target_compile_features(UptimeKumaCpp PRIVATE cxx_std_17)
